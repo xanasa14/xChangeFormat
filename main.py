@@ -1,17 +1,48 @@
 from tkinter import *
 
-
+color = "white"
+entry1 = None
 def donothing():
     filewin = Toplevel(root)
     button = Button(filewin, text="Do nothing button")
     button.pack()
+#Define a function to Change the color of the label widget
+def change_color(color):
+   if (color== ""):
+      color = "white"
+   L1.config(bg= "red", fg= "black")
+   L2.config(bg= "red", fg= "black")
+#
+def clicked():
+    #Input = entry1.get()
+    #FileName = str(Input + ".txt")
+    #TextFile = open(FileName,"w")
 
+    """
+    filewin = Toplevel(root)
+    button = Button(filewin, text="Do nothing button",command=newFile)
+    button.pack()"""
+    filewinsecond= Toplevel(root)
 
+    entry1 = Entry(filewinsecond)
+    button1 = Button(filewinsecond, text="Press to create text file", command=newFile)
+    entry1.pack()
+    button1.pack()
+def newFile():
+    filewin2 = Toplevel(filewinsecond)
+
+    Input = entry1.get()
+    FileName = str(Input + ".txt")
+    TextFile = open(FileName,"w")
+
+    filewin = Toplevel(root)
+    button = Button(filewin2, text="Do nothing button")
+    button.pack()
 root = Tk()
 menubar = Menu(root)
 
 filemenu = Menu(menubar, tearoff=0)
-filemenu.add_command(label="New", command=donothing)
+filemenu.add_command(label="New", command=clicked)
 filemenu.add_command(label="Open", command=donothing)
 filemenu.add_command(label="Save", command=donothing)
 filemenu.add_command(label="Save as...", command=donothing)
@@ -59,15 +90,23 @@ topframe.pack(side=LEFT)
 bottomframe = Frame(root)
 bottomframe.pack(side = BOTTOM)
 
-redbutton = Button(topframe, text="Red", fg='red',)
+redbutton = Button(topframe, text="Red", fg='red',command=change_color("red"))
 redbutton.pack()
 
-greenbutton = Button(topframe, text="Brown", fg="brown")
+greenbutton = Button(topframe, text="Brown", fg="brown",command=change_color('brown'))
 greenbutton.pack()
 
-bluebutton =Button(topframe,text="Blue",fg="blue")
+bluebutton =Button(topframe,text="Blue",fg="blue",command=change_color("blue"))
 bluebutton.pack(side=LEFT)
 
 blackbutton = Button(bottomframe, text="Black",fg="Black")
 blackbutton.pack(side= LEFT)
+
+
+
+
+
+#Create a Button
+Button(bottomframe, text="Change Color", command=change_color("Black")).pack(pady=20)
+
 root.mainloop()
